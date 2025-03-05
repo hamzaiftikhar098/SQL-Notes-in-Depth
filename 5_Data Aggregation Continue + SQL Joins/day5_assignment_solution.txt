@@ -1,0 +1,190 @@
+Note: please do not use any functions which are not taught in the class. you need to solve the questions only with the concepts that have been discussed so far.
+
+1- write a query to get region wise count of return orders
+select region,count(distinct o.order_id) as no_of_return_orders
+from orders o
+inner join returns r on o.order_id=r.order_id
+group by region
+
+2- write a query to get category wise sales of orders that were not returned
+select category,sum(o.sales) as total_sales
+from orders o
+left join returns r on o.order_id=r.order_id
+where r.order_id is null
+group by category
+
+
+3- write a query to print dep name and average salary of employees in that dep .
+select d.dep_name,avg(e.salary) as avg_sal
+from employee e
+inner join dept d on e.dept_id=d.dep_id
+group by d.dep_name
+
+4- write a query to print dep names where none of the emplyees have same salary.
+select d.dep_name
+from employee e
+inner join dept d on e.dept_id=d.dep_id
+group by d.dep_name
+having count(e.emp_id)=count(distinct e.salary)
+
+5- write a query to print sub categories where we have all 3 kinds of returns (others,bad quality,wrong items)
+select o.sub_category
+from orders o
+inner join returns r on o.order_id=r.order_id
+group by o.sub_category
+having count(distinct r.return_reason)=3
+
+6- write a query to find cities where not even a single order was returned.
+select city
+from orders o
+left join returns r on o.order_id=r.order_id
+group by city
+having count(r.order_id)=0
+
+7- write a query to find top 3 subcategories by sales of returned orders in east region
+select top 3 sub_category,sum(o.sales) as return_sales
+from orders o
+inner join returns r on o.order_id=r.order_id
+where o.region='East'
+group by sub_category
+order by return_sales  desc
+
+8- write a query to print dep name for which there is no employee
+select d.dep_id,d.dep_name
+from dept d 
+left join employee e on e.dept_id=d.dep_id
+group by d.dep_id,d.dep_name
+having count(e.emp_id)=0;
+
+9- write a query to print employees name for which dep id is not avaiable in dept table
+select e.*
+from employee e 
+left join dept d  on e.dept_id=d.dep_id
+where d.dep_id is null;
+
+
+
+1. DSA basic to 
+2. SQL and python
+3. ETL DWH
+4. big data tools
+5. Cloud provider, docker, Kubernetes.
+
+
+www.linkedin.com/in/hamza-iftikhar-834277143
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+University of Lincoln Logo
+
+Study
+Research
+Services for Business
+Events and Conferencing
+About Us
+Staff
+Students
+Alumni
+Jobs
+Support Us
+Home
+Study at Lincoln
+Course Fees
+Postgraduate Fees PGT Lab
+Course Fees
+ 	2024/25 Entry*
+Home	£9,600
+Home
+(including Alumni Scholarship 15% reduction )**
+
+£8,160
+International	£17,600
+ 	 
+ Part-time Home	£54 per credit point
+ Part-time International	£98 per credit point
+ * Academic year September - July
+** Subject to eligibility
+
+ 
+
+ 	2025/26 Entry*
+Home	£10,500
+Home
+(including Alumni Scholarship 20% reduction )**
+
+£8,400
+International	£18,400
+International (including International Alumni Scholarship reduction)***	£16,400
+ Part-time Home	£58 per credit point
+ Part-time International	£102 per credit point
+ * Academic year September - July
+** Subject to eligibility
+***Awarded to eligible students as a tuition fee discount for the first year of a postgraduate taught programme
+
+Loans
+A Postgraduate Master's Loan can help with course fees and living costs while you study. Individuals** will be able to borrow up to £12,167 for the purpose of completing an eligible postgraduate Master's qualification. The amount available will depend on the start date of your course.
+
+Scholarships
+As a postgraduate student you may be eligible for scholarships in addition to those shown above.
+
+Guidance for Part-time Postgraduate Fees
+To complete a standard Master's Taught programme, you must complete 180 credit points.
+
+Full time students will be invoiced for the programme in full upon initial enrolment.
+
+For part-time students, tuition fees are payable each credit point enrolled. To calculate your part-time fees, multiply the part-time fee per credit point by the number of credits you intend to complete within that academic year. This is usually between 60 and 90 credit points per year.
+
+For example, if the fee per credit point for your programme is £51, and you enrol on 60 credits, the tuition fee payable for that academic year will be £3,060.
+
+Fees for enrolment on additional modules
+Tuition fees for additional activity are payable by the student/sponsor and charged at the equivalent £ per credit point rate for each module. Additional activity includes:
+
+- Enrolment on modules that are in addition to the validated programme curriculum
+
+- Enrolment on modules that are over and above the full credit diet for the relevant academic year
+
+- Retakes of modules as permitted by the Board of Examiners
+
+Exceptionally tuition fees may not be payable where a student has been granted a retake with approved extenuating circumstances.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

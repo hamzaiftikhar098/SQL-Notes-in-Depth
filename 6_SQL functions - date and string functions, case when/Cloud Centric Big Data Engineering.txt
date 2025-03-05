@@ -1,0 +1,84 @@
+Cloud-Centric Big Data Engineering 
+     (Masters Program)
+========================================
+Introduction to Big Data:
+1. What is Big Data
+Definition provided by the IBM:
+
+“Data that is characterized by 3V’s / 5V’s is considered to be Big Data"
+
+1. Volume: A huge amount of data that can not be stored in a single place where we analyze or get Insights from this data.
+
+2. Velocity:
+if I use facebook for 10 min (I might generate 30 records): How much amount of the data will be generated. (at what speed the data is being generated)
+
+3. Variety:  different types of data being generated:
+            What is the structure/what do we actually mean by the structure of the data
+            (I) data
+            (II) Rows and columns
+            (II) It must have a specific schema:
+                              schema:(a)the column names must be specified
+                                     (b)we must have the data types of the columns specified 
+
+name, age, class
+hamza, 26, 12
+areeba, 27, 14
+Haseeb, 18, 6
+123, eighteen, 2023-11-10
+
+
+
+
+(a): Structured Data: RDBMS Tables (orders data set in SSMS, MySQL)
+(b): Semi Structured Data: lacks the strict schema (csv, tsv,xml files)
+(c) Unstructured Data. Neither a structure nor a schema
+
+This meeting is generating:
+(i)text file (the notes)
+(ii) A video file
+(iii) An attendance Sheet (rows and columns)
+======================================================================
+If we have big data: Then what are the solutions?
+
+1. Monolithic system ( A single machine holding all the data to be computed) 
+2. Distributed System (A group of machines holding this big data to be computed)
+
+Resources:
+For example we have a 10 GBs of csv file (orders data) to analyze
+1. How many orders are there in the data set?
+resources:
+1. Store it (storage)
+2. Memory: (RAM) Where this actually processed () select count(orders) from order
+                     our machine processes it in the storage (in the Hard drive)
+                                      HD: they are write efficient and not reading freindly 
+                     apache spark computes in the MEMORY:
+            in terms of HDFS or traditional systems: Hard Disk
+            in terms of Apache spark : this is RAM
+
+3. Compute: CPU cores (these will actually compute) 2 cores/ 4 cores
+
+Resource: combination
+1. Storage :(Hard disk)
+2. RAM  :where it is processed
+3. CPU cores : which actually process the data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Azure Cloud, and AWS cloud.
