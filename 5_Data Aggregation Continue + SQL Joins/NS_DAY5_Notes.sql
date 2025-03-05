@@ -384,7 +384,7 @@ order by total_returns desc
 select o.Category, SUM(o.sales) as total_sales from 
 orders o left join 
 returns r on o.Order_ID=r.order_id
---where r.order_id is null
+where r.order_id is null
 group by o.Category
 
 --Q3- write a query to print dep name and average salary of employees in that dep.
@@ -400,16 +400,19 @@ group by d.dep_name
 select * from employee
 select * from department
 -- find the departments where employess have the same salary:
-select d.dep_name, COUNT(e.salary) as salary, count(distinct(e.salary)) as distinct_salarie from employee e
-inner join department d on 
-e.dept_id=d.dep_id
-group by d.dep_name
-
-select d.dep_name,e.salary from employee e
+-- Here is the sol:
+-- This gives the departments in which emplyees have the same salary (then apply not)
+--NOTE THAT  A DEPARTMENT IN WHICH EVEN 2 EMPS HAVE THE SAME SALARY WILL HAVE THE COUNT
+-- OF DISTINCT SALARIES LESS THAN THE COUNT OF SALARIES.
+/* for example if there are 5 employees and if two of them have the same salaries the count
+of disticnt salairs = 4 but count of salaries is 5
+This means distinct(count)< count */
+select d.dep_name, COUNT(e.salary) as salary,
+count(distinct(e.salary)) as distinct_salarie  from employee e
 inner join department d
 on e.dept_id=d.dep_id
 group by d.dep_name
-having count(e.emp_id)=count(distinct(e.salary))
+having not(count(e.salary)!=count(distinct(e.salary)))
 
 --Q5- write a query to print sub categories where we have all 3 kinds of returns (others,bad quality,wrong items)
 select distinct return_reason from returns
@@ -431,8 +434,9 @@ where r.return_reason in ('Bad Quality','Others','Wrong Items')
 group by o.Sub_Category
 having count(distinct(r.return_reason))=3
 order by o.Sub_Category
-
+--6- write a query to find cities where not even a single order was returned.
 --Q
+
 select o.City,Count(r.order_id) as total_returns from 
 orders o left join
 returns r on o.order_id=r.order_id
@@ -462,7 +466,15 @@ where o.region= 'East'
 group by o.Sub_Category
 order by total_Sales desc
 --===========================================================
---Q
+--Q8 write a query to print dep name for which there is no employee
+select * from department
+select * from employee
+
+select * from department d
+left join employee e
+on d.dep_id=e.dept_id
+where e.dept_id is null
+
 select d.dep_name, e.emp_name
 from department d left join employee e
 on d.dep_id=e.dept_id
