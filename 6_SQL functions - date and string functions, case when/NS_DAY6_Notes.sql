@@ -86,43 +86,88 @@ inner join employee e2 on e1.manager_id=e2.emp_id
 where e1.salary > e2.salary;
 select * from employee
 
-
+--======================================================================
+-- Here we will talk about String Aggregate Functions
 --- Print the names of employees in each department:
 select
 		employee.dept_id,
 		STRING_AGG(emp_name, ',') as list_of_employees
 from employee
 group by employee.dept_id
+--===============================================
 
+-- If we want to order by salary the list of employees
 select
-		dept_id,
-		STRING_AGG(emp_name,';' )  WITHIN GROUP (ORDER BY salary desc) as list_of_employees
-from employee
-group by dept_id
+	dept_id,
+	STRING_AGG(emp_name,';' )  WITHIN GROUP (ORDER BY salary desc) as list_of_employees
+from
+	employee
+group by
+	dept_id
+--===========================================================================================
+--                                    **DATE fUNCTIONS **
+--===========================================================================================
 
+--===========================================================================================
+--                           1)  DATEPART : Used to the part of the date
+--===========================================================================================
 
 -- Date Functions:
-select order_id, order_date, DATEPART(year,Order_Date) as year_of_the_order from orders
-select order_id, order_date,DATEPART(year,Order_Date) as year_of_the_order, 
-DATEPART(month,Order_Date) as month_of_the_order,DATEPART(day,Order_Date) as day_of_the_order from orders
-
+select
+	order_id,
+	order_date,
+	DATEPART(year,Order_Date) as year_of_the_order
+from
+	orders
+--------------------------------------------------------------------------
+--Q Find all the orders placed in the year 2020 using datapart function
+select
+	order_id,
+	order_date,
+	DATEPART(year,Order_Date) as year_of_the_order
+from
+	orders
+where
+	DATEPART(YEAR,order_date)=2020
+--------------------------------------------------------------------------
+-- Q find the year month and day of each order
+select
+	order_id,
+	order_date,
+	DATEPART(year,Order_Date) as year_of_the_order, 
+	DATEPART(month,Order_Date) as month_of_the_order,
+	DATEPART(day,Order_Date) as day_of_the_order,
+	DATEPART(WEEK,Order_Date) as week_of_the_order
+from 
+	orders
+-------------------------------------------------------------------------
 -- Get me all the orders placed in the year 2020
-select order_id, order_date
-from orders
-where DATEPART(year,Order_Date) = 2020
+select
+	order_id,
+	order_date
+from
+	orders
+where
+	DATEPART(year,Order_Date) = 2020
+
 select * from employee;
 -- How can we print the todays date parameters in the output. (we will use getdate)
---==========================================================
+--================================================================================
+--                   2) DATENAME : used to get the name of the date part
+--================================================================================
 -- How can we get the name of the month? we will use datename function.
-  select order_id, order_date,
-DATEADD(WEEK,2,Order_Date) as added_weeks_into_date,
-DATEPART(year,Order_Date) as year_of_the_order, 
-DATEPART(month,Order_Date) as month_of_the_order,
-DATEPART(day,Order_Date) as day_of_the_order,
-DATENAME(MONTH,order_date) as name_of_the_month,
-DATENAME(DAYOFYEAR,order_date) as name_of_the_day_of_year,
-DATENAME(WEEKDAY,order_date) as name_of_the_week_day
-  from orders
+select
+	order_id,
+	order_date,
+	DATEADD(WEEK,2,Order_Date) as added_weeks_into_date,
+	DATEPART(year,Order_Date) as year_of_the_order, 
+	DATEPART(month,Order_Date) as month_of_the_order,
+	DATEPART(day,Order_Date) as day_of_the_order,
+	DATENAME(MONTH,order_date) as name_of_the_month,
+	DATENAME(DAYOFYEAR,order_date) as name_of_the_day_of_year,
+	DATENAME(WEEKDAY,order_date) as name_of_the_week_day
+from
+	orders
   --================================
   -- now suppose we want to know the number of days or month taken from order date to delivery date
   select
