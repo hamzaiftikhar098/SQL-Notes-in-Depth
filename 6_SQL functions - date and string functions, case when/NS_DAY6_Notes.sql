@@ -1,8 +1,65 @@
+-- First we create the table named employee
+CREATE TABLE employee (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    dept_id INT,
+    salary INT,
+    manager_id INT,
+    emp_age INT
+)
+-- The Insert statement
+INSERT INTO employee (emp_id, emp_name, dept_id, salary, manager_id, emp_age)
+VALUES 
+(1, 'Ankit', 100, 10000, 4, 39),
+(2, 'Mohit', 100, 15000, 5, 48),
+(3, 'Vikas', 100, 10000, 4, 37),
+(4, 'Rohit', 100, 5000, 2, 16),
+(5, 'Mudit', 200, 12000, 6, 55),
+(6, 'Agam', 200, 12000, 2, 14),
+(7, 'Sanjay', 200, 9000, 2, 13),
+(8, 'Ashish', 200, 5000, 2, 12),
+(9, 'Mukesh', 300, 6000, 6, 51),
+(10, 'Rakesh', 500, 7000, 6, 50);
+--check the table
+select * from employee
+select * from department
+-- Q1: Find the manager name for each employee in the table:
+
+select
+		e1.emp_name,
+		e2.emp_name as manager_name
+from employee e1 
+inner join 
+		employee e2 on e1.manager_id=e2.emp_id
+
+--Q2 Find the employees earning more than their managers
+select
+		e1.emp_name,
+		e2.emp_name as manager_name,
+		(e1.salary-e2.salary) as The_diff
+from employee e1 
+inner join 
+		employee e2 on e1.manager_id=e2.emp_id
+where
+		e1.salary>e2.salary
+
 select e.dept_id,d.dep_name from
 employee e
 left join department d on e.dept_id=d.dep_id
 group by e.dept_id,d.dep_name
 having count(distinct salary)=count(1);
+
+-- Find all the employees whose age is greater than their managers
+select
+		e1.emp_name,
+		e2.emp_name as manager_name,
+		(e1.salary-e2.salary) as The_diff
+from employee e1 
+inner join 
+		employee e2 on e1.manager_id=e2.emp_id
+where
+		e1.emp_age>e2.dept_id
+
 
 select o.sub_category
 from orders o
@@ -27,14 +84,23 @@ from
 employee e1
 inner join employee e2 on e1.manager_id=e2.emp_id
 where e1.salary > e2.salary;
+select * from employee
+
 
 --- Print the names of employees in each department:
-select employee.dept_id, STRING_AGG(emp_name, ',') as list_of_employees from employee
+select
+		employee.dept_id,
+		STRING_AGG(emp_name, ',') as list_of_employees
+from employee
 group by employee.dept_id
-select dept_id,STRING_AGG(emp_name,';' )  WITHIN GROUP (ORDER BY salary desc) as list_of_employees
+
+select
+		dept_id,
+		STRING_AGG(emp_name,';' )  WITHIN GROUP (ORDER BY salary desc) as list_of_employees
 from employee
 group by dept_id
-;
+
+
 -- Date Functions:
 select order_id, order_date, DATEPART(year,Order_Date) as year_of_the_order from orders
 select order_id, order_date,DATEPART(year,Order_Date) as year_of_the_order, 
