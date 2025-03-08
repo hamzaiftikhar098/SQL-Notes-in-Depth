@@ -168,18 +168,21 @@ select
 	DATENAME(WEEKDAY,order_date) as name_of_the_week_day
 from
 	orders
-  --================================
+--================================================================================
+  --                 3)  DATEDIFF : used to get the difference in two dates
+--================================================================================
   -- now suppose we want to know the number of days or month taken from order date to delivery date
-  select
-order_id,
-order_date,
-ship_date,
-DATEDIFF(DAY, order_date,ship_date) as number_of_days,
-DATEDIFF(DAY, DATEPART(DAY,order_date),DATEPART(DAY,ship_date)) as number_of_days,
-DATEDIFF(MM, order_date,ship_date) as number_of_months,
-DATEDIFF(year, order_date,ship_date) as number_of_months,
-DATEDIFF(year, order_date,GETDATE()) as number_of_months
-  from orders
+select
+	order_id,
+	order_date,
+	ship_date,
+	DATEDIFF(DAY, order_date,ship_date) as number_of_days,
+	DATEDIFF(DAY, DATEPART(DAY,order_date),DATEPART(DAY,ship_date)) as number_of_days,
+	DATEDIFF(MM, order_date,ship_date) as number_of_months,
+	DATEDIFF(year, order_date,ship_date) as number_of_months,
+	DATEDIFF(year, order_date,GETDATE()) as number_of_months
+from
+	orders
 
 
 alter table  employee add dob date;
@@ -202,21 +205,26 @@ from orders;
 ,DATENAME(month,order_date) as month_name
 ,DATENAME(weekday,order_date) as week_name*/
 */
+
+--==============================================================================
+--                            CASE WHEN: used for conditions                   |
+--==============================================================================
 --if profit < 100 then 'low profit' elseif profit > 100 then 'profit' else end
-select order_id,profit,
-case
-when profit < 100 then 'Low Profit'
-when profit < 250 then 'Medium Profit'
-when profit < 400 then 'High Profit'
-else 'Very high profit'
-end as profit_category
-,case
-when  profit < 0 then 'Loss'
-when profit  >= 100 and profit < 250 then 'Medium Profit'
-when profit < 100 then 'Low Profit'
-when profit >=250 and profit < 400 then 'High Profit'
-else 'Very high profit'
-end as profit_category
+select
+	order_id,profit,
+		case
+			when profit < 100 then 'Low Profit'
+			when profit < 250 then 'Medium Profit'
+			when profit < 400 then 'High Profit'
+			else 'Very high profit'
+		end as profit_category
+		,case
+			when  profit < 0 then 'Loss'
+			when profit  >= 100 and profit < 250 then 'Medium Profit'
+			when profit < 100 then 'Low Profit'
+			when profit >=250 and profit < 400 then 'High Profit'
+			else 'Very high profit'
+		end as profit_category
 from orders
 ;
 
