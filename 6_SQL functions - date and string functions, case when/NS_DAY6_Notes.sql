@@ -217,7 +217,7 @@ select
 			when profit < 250 then 'Medium Profit'
 			when profit < 400 then 'High Profit'
 			else 'Very high profit'
-		end as profit_category
+		end as profit_category1
 		,case
 			when  profit < 0 then 'Loss'
 			when profit  >= 100 and profit < 250 then 'Medium Profit'
