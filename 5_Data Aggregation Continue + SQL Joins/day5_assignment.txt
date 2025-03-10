@@ -21,7 +21,10 @@ returns r on o.Order_ID=r.order_id
 --where r.order_id is null
 group by o.Category
 
+6 + oct 2020 + 2023= 2024 Jan … teaching .... Teaching:
+Aug. 2024 ...
 
+: 
 
 3- write a query to print dep name and average salary of employees in that dep.
 Solution:
