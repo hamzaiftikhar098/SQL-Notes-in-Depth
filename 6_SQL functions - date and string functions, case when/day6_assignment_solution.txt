@@ -80,7 +80,7 @@ group by category
 8- write a query print top 5 cities in west region by average no of days between order date and ship date.
 select top 5 city, avg(datediff(day,order_date,ship_date) ) as avg_days
 from orders
-where region='West'
+where region='West"
 group by city
 order by avg_days desc
 

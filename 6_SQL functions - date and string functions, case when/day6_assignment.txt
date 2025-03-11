@@ -6,7 +6,8 @@ update employee set dob = dateadd(year,-1*emp_age,getdate())
 
 1- write a query to print emp name , their manager name and diffrence in their age (in days)
 for employees whose year of birth is before their managers year of birth
-2- write a query to find subcategories who never had any return orders in the month of november (irrespective of years)
+2- write a query to find subcategories who never had any return orders in the month of november 
+(irrespective of years)
 3- orders table can have multiple rows for a particular order_id when customers buys more than 1 product in an order.
 write a query to find order ids where there is only 1 product bought by the customer.
 4- write a query to print manager names along with the comma separated list(order by emp salary) of all employees directly reporting to him.
@@ -19,6 +20,8 @@ category, total_sales_2019(sales in year 2019), total_sales_2020(sales in year 2
 9- write a query to print emp name, manager name and senior manager name (senior manager is manager's manager)
 
 
+www.linkedin.com/in/
+hamza-iftikhar-datamonde
 
 
 
