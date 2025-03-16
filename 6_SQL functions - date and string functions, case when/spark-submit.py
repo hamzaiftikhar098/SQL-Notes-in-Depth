@@ -2,7 +2,6 @@ from pyspark.sql import SparkSession
 
 spark = SparkSession. \
     builder. \
-   	config('spark.shuffle.useOldFetchProtocol', 'true'). \
     config("spark.sql.warehouse.dir", "/user/itv014967/warehouse"). \
     enableHiveSupport(). \
     master('yarn'). \
