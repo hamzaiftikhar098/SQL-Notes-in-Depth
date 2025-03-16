@@ -4,7 +4,7 @@ spark = SparkSession. \
     builder. \
     config("spark.sql.warehouse.dir", "/user/itv014967/warehouse"). \
     enableHiveSupport(). \
-    master('yarn'). \
+    master('local'). \
     getOrCreate()
 
 orders_schema = "order_id long, order_date string, cust_id long, order_status string"
