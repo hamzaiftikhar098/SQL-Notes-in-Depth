@@ -5,10 +5,27 @@ alter table  employee add dob date;
 update employee set dob = dateadd(year,-1*emp_age,getdate())
 
 Q1- write a query to print emp name , their manager name and diffrence in their age (in days)
+     for employees whose year of birth is before their managers year of birth
+----------------------------------------------------------------------------------------------
+select
+	e1.emp_name as employee,
+	e1.emp_age as emp_age,
+	e2.emp_name as manager,
+	e2.emp_age as manager_age,
+	DATEDIFF(day,e1.emp_age,e2.emp_age) as diff_of_age_in_days
+from 
+	employee e1
+inner join
+	employee e2
+on
+	e1.manager_id=e2.emp_id
+where e1.emp_age < e2.emp_age
+----------------------------------------------------------------------------------------------
+                               <===============================>
    
-for employees whose year of birth is before their managers year of birth
 Q2- write a query to find subcategories who never had any return orders in the month of november 
 (irrespective of years)
+----------------------------------------------------------------------------------------------
 Q3- orders table can have multiple rows for a particular order_id when customers buys more than 1 product in an order.
 write a query to find order ids where there is only 1 product bought by the customer.
 4- write a query to print manager names along with the comma separated list(order by emp salary) of all employees directly reporting to him.
