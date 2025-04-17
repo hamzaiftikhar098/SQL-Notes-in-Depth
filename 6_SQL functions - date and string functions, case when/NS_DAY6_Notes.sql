@@ -156,16 +156,15 @@ select * from employee;
 --                   2) DATENAME : used to get the name of the date part
 --================================================================================
 -- How can we get the name of the month? we will use datename function.
-select
+select top 5
 	order_id,
 	order_date,
-	DATEADD(WEEK,2,Order_Date) as added_weeks_into_date,
-	DATEPART(year,Order_Date) as year_of_the_order, 
-	DATEPART(month,Order_Date) as month_of_the_order,
-	DATEPART(day,Order_Date) as day_of_the_order,
+	DATEPART(MONTH,order_date) as name_of_the_month,
 	DATENAME(MONTH,order_date) as name_of_the_month,
 	DATENAME(DAYOFYEAR,order_date) as name_of_the_day_of_year,
-	DATENAME(WEEKDAY,order_date) as name_of_the_week_day
+	DATEPART(DAYOFYEAR,order_date) as name_of_the_month,
+	DATENAME(WEEKDAY,order_date) as name_of_the_week_day,
+	DATEPART(WEEKDAY,order_date) as day_of_the_week
 from
 	orders
 --================================================================================
