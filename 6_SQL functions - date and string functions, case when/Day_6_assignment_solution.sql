@@ -88,3 +88,24 @@ select e2.emp_name as manager_name , string_agg(e1.emp_name,',') as emp_list
 from employee e1
 inner join employee e2 on e1.manager_id=e2.emp_id
 group by e2.emp_name;
+
+--                          <---------------------------->
+
+--===============================================================================================================================
+/* 5- write a query to get number of business days between order_date and ship_date (exclude weekends). 
+          Assume that all order date and ship date are on weekdays only */
+--===============================================================================================================================
+select top 1 * from orders
+select
+		Order_ID,
+		Order_Date,
+		Ship_date,
+		DATEDIFF(day,Order_Date,Ship_date) as diff_of_days
+from orders
+
+--                          <---------------------------->
+
+--===============================================================================================================================
+/* 5- write a query to get number of business days between order_date and ship_date (exclude weekends). 
+          Assume that all order date and ship date are on weekdays only */
+--===============================================================================================================================
