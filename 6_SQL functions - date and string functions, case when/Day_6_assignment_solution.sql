@@ -106,6 +106,90 @@ from orders
 --                          <---------------------------->
 
 --===============================================================================================================================
-/* 5- write a query to get number of business days between order_date and ship_date (exclude weekends). 
-          Assume that all order date and ship date are on weekdays only */
+/*6- write a query to print 3 columns: category, total_sales and (total sales of returned orders)*/
 --===============================================================================================================================
+
+select
+	o.Category,
+	SUM(o.sales) AS total_sales,
+	Sum(CASE
+			WHEN
+			r.order_id is not null THEN Sales
+			ELSE 0
+		END
+	) AS total_sales_of_returned_orders
+from
+	orders as o
+left join
+	returns as r
+	on o.Order_ID = r.order_id
+group by
+	o.Category;
+
+-- provided solution:
+select o.category,sum(o.sales) as total_sales
+,sum(case when r.order_id is not null then sales end) as return_orders_sales
+from orders o
+left join returns r on o.order_id=r.order_id
+group by category;
+
+--                          <---------------------------->
+
+--===============================================================================================================================
+/* 7- write a query to print below 3 columns
+       category, total_sales_2019(sales in year 2019), total_sales_2020(sales in year 2020) */
+--===============================================================================================================================
+select top 1 * from orders
+SELECT
+    category,
+    SUM(
+        CASE
+            WHEN DATEPART(year, Order_Date) = 2019 THEN sales
+            ELSE 0
+        END
+    ) AS total_sales_2019,
+    SUM(
+        CASE
+            WHEN DATEPART(year, Order_Date) = 2020 THEN sales
+            ELSE 0
+        END
+    ) AS total_sales_2020,
+	avg(
+        CASE
+            WHEN DATEPART(year, Order_Date) = 2019 THEN sales
+            ELSE 0
+        END
+    ) AS average_sales_2019,
+	avg(
+        CASE
+            WHEN DATEPART(year, Order_Date) = 2020 THEN sales
+            ELSE 0
+        END
+    ) AS averga_sales_2020
+FROM 
+    orders
+GROUP BY 
+    category;
+
+--                          <---------------------------->
+
+--===============================================================================================================================
+/*8- write a query print top 5 cities in west region by average no of days between order date and ship date.*/
+--===============================================================================================================================
+select top 1 * from orders
+select top 5
+	City,
+	Region,
+	AVG(
+		datediff(DD,Order_date,Ship_Date)
+	) as n0_of_days
+from 
+	orders
+where 
+	Region = 'West'
+group by Region,city
+order by n0_of_days desc
+
+
+
+	
