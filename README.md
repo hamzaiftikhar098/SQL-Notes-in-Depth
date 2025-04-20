@@ -3,4 +3,4 @@ These notes also include the .sql note books and notion notes
 After each lecture, an assignment with solution is also uploaded here.
 The solution is available in this file also....
 I have added
-my own .SQL solution files
+my own .SQL solution files in order to make the notes more compact 
