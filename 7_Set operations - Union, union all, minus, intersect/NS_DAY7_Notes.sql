@@ -35,8 +35,11 @@ select order_id,customer_name
 ,order_id+'-'+customer_name 
 from orders;
 --null handling function
+ 
+select Order_ID,city from orders where Order_ID is null
+--update orders set City = Null where Order_ID= 'CA-2020-138688' and Order_ID= 'US-2021-156909'
+
 select order_id,city,isnull(city,'unknown') as new_city,
-isnull(sales,1) as new_city,
 state,coalesce(city,state,region,'unknown') as neww_city
 from orders
 --where city is null
@@ -68,6 +71,8 @@ insert into orders_west values(1,'west',100)
 select * from orders_west
 union all
 select * from orders_east;
+
+--union: it unions all first, then sorts, and then removes the duplicates from the output.
 
 select * from orders_west
 union 

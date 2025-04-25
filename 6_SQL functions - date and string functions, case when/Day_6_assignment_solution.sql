@@ -190,6 +190,38 @@ where
 group by Region,city
 order by n0_of_days desc
 
+--                          <---------------------------->
 
+--===============================================================================================================================
+/*9- write a query to print emp name, manager name and senior manager name (senior manager is manager's manager)*/
+--===============================================================================================================================
+select * from employee
 
-	
+-- we can see that ankits manager is rohit and that of rohits it mohit, so mohit is a senior manager.
+-- first we need to reach the managers and then from manager to their manager.
+
+SELECT 
+	e1.emp_name,
+	e2.emp_name as manager_name,
+	e3.emp_name as senior_manager
+FROM 
+	employee e1 
+INNER JOIN
+	employee e2
+	on
+	e1.manager_id = e2.emp_id
+	inner join employee e3 
+	on e2.manager_id = e3.emp_id;
+
+-- provided solution
+select
+    e1.emp_name,e2.emp_name as manager_name,
+    e3.emp_name as senior_manager_name
+from employee e1
+inner join
+        employee e2
+    on
+        e1.manager_id=e2.emp_id
+inner join
+        employee e3
+    on e2.manager_id=e3.emp_id;
