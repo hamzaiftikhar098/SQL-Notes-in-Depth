@@ -69,10 +69,16 @@ select * from drivers
 /* 2- write a query to print first name and last name of a customer using orders table(everything after 
         first space can be considered as last name) customer_name, first_name,last_name */
 --=============================================================================================================
-select Order_Id, Customer_Name from orders
+select Customer_Name,
+--left(Customer_Name,(charindex(' ',Customer_Name))) as first_name,
+trim(substring(Customer_Name,1,(charindex(' ',Customer_Name)))) as first_name,
+substring(Customer_Name,(charindex(' ',Customer_Name)),LEN(Customer_Name)) as last_name
+from orders;
 
-
-
+-- provided Solution
+select customer_name , trim(SUBSTRING(customer_name,1,CHARINDEX(' ',customer_name))) as first_name
+, SUBSTRING(customer_name,CHARINDEX(' ',customer_name)+1,len(customer_name)-CHARINDEX(' ',customer_name)+1) as second_name
+from orders;
 
 
 
